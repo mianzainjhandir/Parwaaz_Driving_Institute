@@ -34,10 +34,17 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
+  void _onBookNow() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Book Now clicked!')),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final primaryColor = const Color(0xFF0B2545);
     final accentPink = const Color(0xFFFF2E63);
+    final whatsappGreen = const Color(0xFF25D366);
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -50,11 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
             SnackBar(content: Text('Selected: $title')),
           );
         },
-        onBookNowPressed: () {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Book Now clicked!')),
-          );
-        },
+        onBookNowPressed: _onBookNow,
         onWhatsAppPressed: _launchWhatsApp,
       ),
       endDrawer: Drawer(
@@ -107,6 +110,62 @@ class _MyHomePageState extends State<MyHomePage> {
                     SnackBar(content: Text('Selected: $item')),
                   );
                 },
+              ),
+            ),
+            const Divider(),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                children: [
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                        _onBookNow();
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: accentPink,
+                        foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(vertical: 12),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(24),
+                        ),
+                      ),
+                      child: Text(
+                        'Book Now',
+                        style: GoogleFonts.montserrat(
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton.icon(
+                      onPressed: () {
+                        Navigator.pop(context);
+                        _launchWhatsApp();
+                      },
+                      icon: const Icon(Icons.chat, color: Colors.white),
+                      label: Text(
+                        'WhatsApp Chat',
+                        style: GoogleFonts.montserrat(
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: whatsappGreen,
+                        foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(vertical: 12),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(24),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ],

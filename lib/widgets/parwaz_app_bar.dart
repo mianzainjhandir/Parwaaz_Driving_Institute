@@ -42,7 +42,7 @@ class ParwaazAppBar extends StatelessWidget implements PreferredSizeWidget {
           return Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              // Logo Section
+              // Logo Section (Always visible on left)
               Row(
                 children: [
                   Image.asset(
@@ -79,7 +79,7 @@ class ParwaazAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ],
               ),
 
-              // Navigation Links (for wide screens)
+              // Navigation Links (for wide screens / laptops)
               if (isWide)
                 Row(
                   children: [
@@ -97,62 +97,62 @@ class ParwaazAppBar extends StatelessWidget implements PreferredSizeWidget {
                   ],
                 ),
 
-              // Right Actions: Book Now & WhatsApp
-              Row(
-                children: [
-                  ElevatedButton(
-                    onPressed: onBookNowPressed ?? () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: accentPink,
-                      foregroundColor: Colors.white,
-                      elevation: 0,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 20,
-                        vertical: 12,
+              // Right Actions: Book Now & WhatsApp (for wide screens) OR Hamburger Menu (for mobile)
+              if (isWide)
+                Row(
+                  children: [
+                    ElevatedButton(
+                      onPressed: onBookNowPressed ?? () {},
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: accentPink,
+                        foregroundColor: Colors.white,
+                        elevation: 0,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 12,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(24),
+                        ),
                       ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(24),
-                      ),
-                    ),
-                    child: Text(
-                      'Book Now',
-                      style: GoogleFonts.montserrat(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  InkWell(
-                    onTap: onWhatsAppPressed ?? () {},
-                    borderRadius: BorderRadius.circular(50),
-                    child: Container(
-                      width: 44,
-                      height: 44,
-                      decoration: BoxDecoration(
-                        color: whatsappGreen,
-                        shape: BoxShape.circle,
-                      ),
-                      child: const Icon(
-                        Icons.chat,
-                        color: Colors.white,
-                        size: 22,
+                      child: Text(
+                        'Book Now',
+                        style: GoogleFonts.montserrat(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
-                  ),
-                  if (!isWide) ...[
                     const SizedBox(width: 12),
-                    Builder(
-                      builder: (context) => IconButton(
-                        icon: Icon(Icons.menu, color: primaryColor),
-                        onPressed: () {
-                          Scaffold.of(context).openEndDrawer();
-                        },
+                    InkWell(
+                      onTap: onWhatsAppPressed ?? () {},
+                      borderRadius: BorderRadius.circular(50),
+                      child: Container(
+                        width: 44,
+                        height: 44,
+                        decoration: BoxDecoration(
+                          color: whatsappGreen,
+                          shape: BoxShape.circle,
+                        ),
+                        child: const Icon(
+                          Icons.chat,
+                          color: Colors.white,
+                          size: 22,
+                        ),
                       ),
                     ),
                   ],
-                ],
-              ),
+                )
+              else
+                // Mobile View: Hamburger Menu Icon matching the reference image
+                Builder(
+                  builder: (context) => IconButton(
+                    icon: Icon(Icons.menu, color: primaryColor, size: 30),
+                    onPressed: () {
+                      Scaffold.of(context).openEndDrawer();
+                    },
+                  ),
+                ),
             ],
           );
         },
