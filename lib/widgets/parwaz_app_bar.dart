@@ -46,9 +46,8 @@ class ParwaazAppBar extends StatelessWidget implements PreferredSizeWidget {
               Row(
                 children: [
                   Image.asset(
-                    'assets/images/img.png',
-                    width: 45,
-                    height: 45,
+                    'assets/images/img_1.png',
+                    height: 52,
                     fit: BoxFit.contain,
                   ),
                   const SizedBox(width: 10),
