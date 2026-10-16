@@ -183,7 +183,7 @@ class _HomeContentState extends State<HomeContent> {
               ),
             ),
 
-            // Features Highlights Bar with Images
+            // Features Highlights Bar with img_1, img_2, img_3
             Container(
               width: double.infinity,
               color: Colors.white,
@@ -204,14 +204,14 @@ class _HomeContentState extends State<HomeContent> {
                         _verticalDivider(),
                         Expanded(
                           child: _featureItem(
-                            'assets/images/img_1.png',
+                            'assets/images/img_2.png',
                             'Safe & Supportive\nEnvironment',
                           ),
                         ),
                         _verticalDivider(),
                         Expanded(
                           child: _featureItem(
-                            'assets/images/img_1.png',
+                            'assets/images/img_3.png',
                             'Experienced\nFemale Instructors',
                           ),
                         ),
@@ -232,12 +232,12 @@ class _HomeContentState extends State<HomeContent> {
                         ),
                         const SizedBox(height: 24),
                         _featureItem(
-                          'assets/images/img_1.png',
+                          'assets/images/img_2.png',
                           'Safe & Supportive Environment',
                         ),
                         const SizedBox(height: 24),
                         _featureItem(
-                          'assets/images/img_1.png',
+                          'assets/images/img_3.png',
                           'Experienced Female Instructors',
                         ),
                         const SizedBox(height: 24),
