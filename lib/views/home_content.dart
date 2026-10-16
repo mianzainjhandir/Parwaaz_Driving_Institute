@@ -184,7 +184,7 @@ class _HomeContentState extends State<HomeContent> {
                 ),
               ),
 
-              // Features Highlights Bar (Right below hero banner)
+              // Features Highlights Bar with Images
               Container(
                 width: double.infinity,
                 color: Colors.white,
@@ -198,28 +198,28 @@ class _HomeContentState extends State<HomeContent> {
                         children: [
                           Expanded(
                             child: _featureItem(
-                              Icons.person,
+                              'assets/images/img_1.png',
                               'Female Only\nStudents',
                             ),
                           ),
                           _verticalDivider(),
                           Expanded(
                             child: _featureItem(
-                              Icons.security,
+                              'assets/images/img_1.png',
                               'Safe & Supportive\nEnvironment',
                             ),
                           ),
                           _verticalDivider(),
                           Expanded(
                             child: _featureItem(
-                              Icons.drive_eta,
+                              'assets/images/img_1.png',
                               'Experienced\nFemale Instructors',
                             ),
                           ),
                           _verticalDivider(),
                           Expanded(
                             child: _featureItem(
-                              Icons.location_on,
+                              'assets/images/img_1.png',
                               'Home Pickup &\nMobile Service',
                             ),
                           ),
@@ -228,22 +228,22 @@ class _HomeContentState extends State<HomeContent> {
                     : Column(
                         children: [
                           _featureItem(
-                            Icons.person,
+                            'assets/images/img_1.png',
                             'Female Only Students',
                           ),
                           const SizedBox(height: 24),
                           _featureItem(
-                            Icons.security,
+                            'assets/images/img_1.png',
                             'Safe & Supportive Environment',
                           ),
                           const SizedBox(height: 24),
                           _featureItem(
-                            Icons.drive_eta,
+                            'assets/images/img_1.png',
                             'Experienced Female Instructors',
                           ),
                           const SizedBox(height: 24),
                           _featureItem(
-                            Icons.location_on,
+                            'assets/images/img_1.png',
                             'Home Pickup & Mobile Service',
                           ),
                         ],
@@ -256,7 +256,7 @@ class _HomeContentState extends State<HomeContent> {
     );
   }
 
-  Widget _featureItem(IconData icon, String title) {
+  Widget _featureItem(String imagePath, String title) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -266,11 +266,16 @@ class _HomeContentState extends State<HomeContent> {
           decoration: BoxDecoration(
             color: const Color(0xFFFFEEF3),
             shape: BoxShape.circle,
+            border: Border.all(color: const Color(0xFFFF2E63).withValues(alpha: 0.3), width: 2),
           ),
-          child: Icon(
-            icon,
-            color: const Color(0xFFFF2E63),
-            size: 32,
+          child: ClipOval(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Image.asset(
+                imagePath,
+                fit: BoxFit.contain,
+              ),
+            ),
           ),
         ),
         const SizedBox(height: 16),
