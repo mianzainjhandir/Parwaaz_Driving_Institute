@@ -49,18 +49,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: ParwaazAppBar(
-        onMenuItemSelected: (title) {
-          setState(() {
-            _selectedTab = title;
-          });
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Selected: $title')),
-          );
-        },
-        onBookNowPressed: _onBookNow,
-        onWhatsAppPressed: _launchWhatsApp,
-      ),
       endDrawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
@@ -172,12 +160,35 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            HomeContent(),
-          ],
-        ),
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            floating: true,
+            snap: true,
+            pinned: false,
+            toolbarHeight: 80,
+            automaticallyImplyLeading: false,
+            backgroundColor: Colors.white,
+            elevation: 0,
+            flexibleSpace: FlexibleSpaceBar(
+              background: ParwaazAppBar(
+                onMenuItemSelected: (title) {
+                  setState(() {
+                    _selectedTab = title;
+                  });
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Selected: $title')),
+                  );
+                },
+                onBookNowPressed: _onBookNow,
+                onWhatsAppPressed: _launchWhatsApp,
+              ),
+            ),
+          ),
+          const SliverToBoxAdapter(
+            child: HomeContent(),
+          ),
+        ],
       ),
     );
   }
