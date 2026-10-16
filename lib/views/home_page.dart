@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../widgets/parwaz_app_bar.dart';
+import 'home_content.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -171,15 +172,10 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      body: Center(
-        child: Text(
-          '$_selectedTab Page',
-          style: GoogleFonts.montserrat(
-            fontSize: 24,
-            fontWeight: FontWeight.w600,
-            color: primaryColor,
-          ),
-        ),
+      body: Column(
+        children: [
+          HomeContent()
+        ],
       ),
     );
   }
