@@ -315,7 +315,7 @@ class _HomeContentState extends State<HomeContent> {
                           child: Align(
                             alignment: Alignment.centerRight,
                             child: Image.asset(
-                              'assets/images/img_3.png',
+                              'assets/images/img_4.png',
                               height: 240,
                               fit: BoxFit.contain,
                             ),
@@ -348,7 +348,7 @@ class _HomeContentState extends State<HomeContent> {
                         ),
                         const SizedBox(height: 24),
                         Image.asset(
-                          'assets/images/img_3.png',
+                          'assets/images/img_4.png',
                           height: 200,
                           fit: BoxFit.contain,
                         ),

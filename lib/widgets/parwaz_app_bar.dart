@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart'; // FontAwesome import kiya hai
 
 class ParwaazAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Function(String)? onMenuItemSelected;
@@ -80,7 +79,7 @@ class ParwaazAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ],
               ),
 
-              // Navigation Links (for wide screens / laptops)
+              // Navigation Links (for wide screens / laptops ONLY)
               if (isWide)
                 Row(
                   children: [
@@ -135,19 +134,17 @@ class ParwaazAppBar extends StatelessWidget implements PreferredSizeWidget {
                           color: whatsappGreen,
                           shape: BoxShape.circle,
                         ),
-                        child: const Center(
-                          child: FaIcon(
-                            FontAwesomeIcons.whatsapp,
-                            color: Colors.white,
-                            size: 22,
-                          ),
+                        child: const Icon(
+                          Icons.chat,
+                          color: Colors.white,
+                          size: 22,
                         ),
                       ),
                     ),
                   ],
                 )
               else
-              // Mobile View: WhatsApp icon + Hamburger Menu
+                // Mobile View: WhatsApp icon + Hamburger Menu (ONLY on mobile)
                 Row(
                   children: [
                     InkWell(
@@ -160,12 +157,10 @@ class ParwaazAppBar extends StatelessWidget implements PreferredSizeWidget {
                           color: whatsappGreen,
                           shape: BoxShape.circle,
                         ),
-                        child: const Center(
-                          child: FaIcon(
-                            FontAwesomeIcons.whatsapp,
-                            color: Colors.white,
-                            size: 20,
-                          ),
+                        child: const Icon(
+                          Icons.chat,
+                          color: Colors.white,
+                          size: 20,
                         ),
                       ),
                     ),
