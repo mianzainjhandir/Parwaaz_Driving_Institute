@@ -172,10 +172,12 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      body: Column(
-        children: [
-          HomeContent()
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            HomeContent(),
+          ],
+        ),
       ),
     );
   }
