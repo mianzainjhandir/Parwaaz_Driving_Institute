@@ -248,6 +248,134 @@ class _HomeContentState extends State<HomeContent> {
                       ],
                     ),
             ),
+
+            // Bottom Journey Banner matching user reference image
+            Container(
+              width: double.infinity,
+              color: const Color(0xFFFFF5F7),
+              padding: EdgeInsets.symmetric(
+                horizontal: isWide ? 64 : 24,
+                vertical: 40,
+              ),
+              child: isWide
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          flex: 1,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Your Journey to Independence\nStarts Here',
+                                style: GoogleFonts.playfairDisplay(
+                                  fontSize: 32,
+                                  fontWeight: FontWeight.bold,
+                                  color: const Color(0xFF0B2545),
+                                  height: 1.2,
+                                ),
+                              ),
+                              const SizedBox(height: 16),
+                              Text(
+                                'Get behind the wheel and gain the confidence to go wherever you want.',
+                                style: GoogleFonts.montserrat(
+                                  fontSize: 16,
+                                  color: const Color(0xFF4A5568),
+                                  height: 1.5,
+                                ),
+                              ),
+                              const SizedBox(height: 24),
+                              Row(
+                                children: [
+                                  Text(
+                                    'Learn  •  Drive  •  Fly',
+                                    style: GoogleFonts.playfairDisplay(
+                                      fontSize: 26,
+                                      fontStyle: FontStyle.italic,
+                                      fontWeight: FontWeight.bold,
+                                      color: const Color(0xFFFF2E63),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 12),
+                                  const Icon(
+                                    Icons.send_rounded,
+                                    color: Color(0xFFFF2E63),
+                                    size: 22,
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(width: 32),
+                        Expanded(
+                          flex: 1,
+                          child: Align(
+                            alignment: Alignment.centerRight,
+                            child: Image.asset(
+                              'assets/images/img_3.png',
+                              height: 240,
+                              fit: BoxFit.contain,
+                            ),
+                          ),
+                        ),
+                      ],
+                    )
+                  : Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Your Journey to Independence Starts Here',
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.playfairDisplay(
+                            fontSize: 26,
+                            fontWeight: FontWeight.bold,
+                            color: const Color(0xFF0B2545),
+                            height: 1.2,
+                          ),
+                        ),
+                        const SizedBox(height: 12),
+                        Text(
+                          'Get behind the wheel and gain the confidence to go wherever you want.',
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.montserrat(
+                            fontSize: 14,
+                            color: const Color(0xFF4A5568),
+                            height: 1.5,
+                          ),
+                        ),
+                        const SizedBox(height: 24),
+                        Image.asset(
+                          'assets/images/img_3.png',
+                          height: 200,
+                          fit: BoxFit.contain,
+                        ),
+                        const SizedBox(height: 20),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Learn  •  Drive  •  Fly',
+                              style: GoogleFonts.playfairDisplay(
+                                fontSize: 24,
+                                fontStyle: FontStyle.italic,
+                                fontWeight: FontWeight.bold,
+                                color: const Color(0xFFFF2E63),
+                              ),
+                            ),
+                            const SizedBox(width: 12),
+                            const Icon(
+                              Icons.send_rounded,
+                              color: Color(0xFFFF2E63),
+                              size: 20,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+            ),
           ],
         );
       },
