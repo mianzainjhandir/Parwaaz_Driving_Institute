@@ -37,7 +37,7 @@ class ParwaazAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       child: LayoutBuilder(
         builder: (context, constraints) {
-          bool isWide = constraints.maxWidth > 900;
+          bool isWide = constraints.maxWidth > 750;
 
           return Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
