@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart'; // FontAwesome import kiya hai
 
 class ParwaazAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Function(String)? onMenuItemSelected;
@@ -97,7 +98,7 @@ class ParwaazAppBar extends StatelessWidget implements PreferredSizeWidget {
                   ],
                 ),
 
-              // Right Actions: Book Now & WhatsApp (for wide screens) OR Hamburger Menu (for mobile)
+              // Right Actions: Book Now & WhatsApp (for wide screens) OR Mobile View Actions
               if (isWide)
                 Row(
                   children: [
@@ -134,24 +135,50 @@ class ParwaazAppBar extends StatelessWidget implements PreferredSizeWidget {
                           color: whatsappGreen,
                           shape: BoxShape.circle,
                         ),
-                        child: const Icon(
-                          Icons.chat,
-                          color: Colors.white,
-                          size: 22,
+                        child: const Center(
+                          child: FaIcon(
+                            FontAwesomeIcons.whatsapp,
+                            color: Colors.white,
+                            size: 22,
+                          ),
                         ),
                       ),
                     ),
                   ],
                 )
               else
-                // Mobile View: Hamburger Menu Icon matching the reference image
-                Builder(
-                  builder: (context) => IconButton(
-                    icon: Icon(Icons.menu, color: primaryColor, size: 30),
-                    onPressed: () {
-                      Scaffold.of(context).openEndDrawer();
-                    },
-                  ),
+              // Mobile View: WhatsApp icon + Hamburger Menu
+                Row(
+                  children: [
+                    InkWell(
+                      onTap: onWhatsAppPressed ?? () {},
+                      borderRadius: BorderRadius.circular(50),
+                      child: Container(
+                        width: 40,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          color: whatsappGreen,
+                          shape: BoxShape.circle,
+                        ),
+                        child: const Center(
+                          child: FaIcon(
+                            FontAwesomeIcons.whatsapp,
+                            color: Colors.white,
+                            size: 20,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Builder(
+                      builder: (context) => IconButton(
+                        icon: Icon(Icons.menu, color: primaryColor, size: 30),
+                        onPressed: () {
+                          Scaffold.of(context).openEndDrawer();
+                        },
+                      ),
+                    ),
+                  ],
                 ),
             ],
           );
