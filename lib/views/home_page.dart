@@ -1,6 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../widgets/parwaz_app_bar.dart';
 
@@ -13,6 +13,26 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   String _selectedTab = 'Home';
+
+  Future<void> _launchWhatsApp() async {
+    // Phone number: 03234248524 -> international format: +923234248524
+    final Uri url = Uri.parse('https://wa.me/923234248524?text=Hello%20Parwaaz%20Driving%20Institute,%20I%20would%20like%20to%20inquire%20about%20your%20driving%20courses.');
+    try {
+      if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Could not launch WhatsApp')),
+          );
+        }
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error opening WhatsApp: $e')),
+        );
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,11 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
             const SnackBar(content: Text('Book Now clicked!')),
           );
         },
-        onWhatsAppPressed: () {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('WhatsApp chat opened!')),
-          );
-        },
+        onWhatsAppPressed: _launchWhatsApp,
       ),
       endDrawer: Drawer(
         child: ListView(

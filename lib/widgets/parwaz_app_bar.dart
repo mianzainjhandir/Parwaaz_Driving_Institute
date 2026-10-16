@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ParwaazAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -134,9 +135,9 @@ class ParwaazAppBar extends StatelessWidget implements PreferredSizeWidget {
                         shape: BoxShape.circle,
                       ),
                       child: const Icon(
-                        Icons.chat,
+                        FontAwesomeIcons.whatsapp,
                         color: Colors.white,
-                        size: 22,
+                        size: 20,
                       ),
                     ),
                   ),
