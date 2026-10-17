@@ -47,6 +47,8 @@ class AboutView extends StatelessWidget {
                     ),
               const SizedBox(height: 60),
               _buildMissionVisionValuesCard(isCardWide),
+              const SizedBox(height: 60),
+              _buildWhyChooseUsSection(isWide),
             ],
           ),
         );
@@ -380,6 +382,221 @@ class AboutView extends StatelessWidget {
       height: 110,
       color: borderColor,
       margin: const EdgeInsets.symmetric(horizontal: 16),
+    );
+  }
+
+  Widget _buildWhyChooseUsSection(bool isWide) {
+    const navyColor = Color(0xFF0B2545);
+
+    return Container(
+      width: double.infinity,
+      color: Colors.white,
+      padding: const EdgeInsets.symmetric(vertical: 20),
+      child: isWide
+          ? Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                // Left Content: Title + 2 Columns of Bullets
+                Expanded(
+                  flex: 6,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Why Choose Us?',
+                        style: GoogleFonts.playfairDisplay(
+                          fontSize: 36,
+                          fontWeight: FontWeight.bold,
+                          color: navyColor,
+                        ),
+                      ),
+                      const SizedBox(height: 28),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // Column 1
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                _buildBulletPoint('Female-only driving school'),
+                                const SizedBox(height: 20),
+                                _buildBulletPoint('Flexible timings'),
+                                const SizedBox(height: 20),
+                                _buildBulletPoint('Practical & real road training'),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(width: 20),
+                          // Column 2
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                _buildBulletPoint('Home pickup & mobile service'),
+                                const SizedBox(height: 20),
+                                _buildBulletPoint('Friendly & patient instructors'),
+                                const SizedBox(height: 20),
+                                _buildBulletPoint('Affordable and transparent fees'),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: 40),
+                // Right Image Section
+                Expanded(
+                  flex: 4,
+                  child: _buildWhyChooseUsImage(),
+                ),
+              ],
+            )
+          : Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Why Choose Us?',
+                  style: GoogleFonts.playfairDisplay(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                    color: navyColor,
+                  ),
+                ),
+                const SizedBox(height: 24),
+                _buildBulletPoint('Female-only driving school'),
+                const SizedBox(height: 16),
+                _buildBulletPoint('Home pickup & mobile service'),
+                const SizedBox(height: 16),
+                _buildBulletPoint('Flexible timings'),
+                const SizedBox(height: 16),
+                _buildBulletPoint('Friendly & patient instructors'),
+                const SizedBox(height: 16),
+                _buildBulletPoint('Practical & real road training'),
+                const SizedBox(height: 16),
+                _buildBulletPoint('Affordable and transparent fees'),
+                const SizedBox(height: 36),
+                Center(child: _buildWhyChooseUsImage()),
+              ],
+            ),
+    );
+  }
+
+  Widget _buildBulletPoint(String text) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        const Icon(
+          Icons.check_circle_rounded,
+          color: Color(0xFFFF2E63),
+          size: 22,
+        ),
+        const SizedBox(width: 12),
+        Flexible(
+          child: Text(
+            text,
+            style: GoogleFonts.montserrat(
+              fontSize: 15,
+              fontWeight: FontWeight.w600,
+              color: const Color(0xFF0B2545),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildWhyChooseUsImage() {
+    return Stack(
+      clipBehavior: Clip.none,
+      alignment: Alignment.center,
+      children: [
+        // Pink background halo
+        Container(
+          width: 320,
+          height: 240,
+          decoration: BoxDecoration(
+            color: const Color(0xFFFFEEF3),
+            borderRadius: BorderRadius.circular(120),
+          ),
+        ),
+        // Main Image Frame
+        Container(
+          width: 310,
+          height: 230,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(110),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.08),
+                blurRadius: 15,
+                offset: const Offset(0, 5),
+              ),
+            ],
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(110),
+            child: Image.asset(
+              'assets/images/why_choose_us.png',
+              fit: BoxFit.cover,
+              errorBuilder: (context, error, stackTrace) {
+                return Container(
+                  color: const Color(0xFFFFEEF3),
+                  alignment: Alignment.center,
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(
+                        Icons.image_outlined,
+                        color: Color(0xFFFF2E63),
+                        size: 40,
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        'assets/images/why_choose_us.png',
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.montserrat(
+                          fontSize: 12,
+                          color: const Color(0xFF0B2545),
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
+        ),
+        // Floating Heart Badge on Top Right
+        Positioned(
+          top: -10,
+          right: 10,
+          child: Container(
+            padding: const EdgeInsets.all(8),
+            decoration: const BoxDecoration(
+              color: Colors.white,
+              shape: BoxShape.circle,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black12,
+                  blurRadius: 8,
+                  offset: Offset(0, 3),
+                ),
+              ],
+            ),
+            child: const Icon(
+              Icons.favorite_border_rounded,
+              color: Color(0xFFFF2E63),
+              size: 24,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
