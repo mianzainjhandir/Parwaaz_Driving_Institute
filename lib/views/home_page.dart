@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../widgets/parwaz_app_bar.dart';
+import 'about.dart';
 import 'home_content.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -95,9 +96,6 @@ class _MyHomePageState extends State<MyHomePage> {
                     _selectedTab = item;
                   });
                   Navigator.pop(context);
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('Selected: $item')),
-                  );
                 },
               ),
             ),
@@ -176,17 +174,14 @@ class _MyHomePageState extends State<MyHomePage> {
                   setState(() {
                     _selectedTab = title;
                   });
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('Selected: $title')),
-                  );
                 },
                 onBookNowPressed: _onBookNow,
                 onWhatsAppPressed: _launchWhatsApp,
               ),
             ),
           ),
-          const SliverToBoxAdapter(
-            child: HomeContent(),
+          SliverToBoxAdapter(
+            child: _selectedTab == 'About' ? const AboutView() : const HomeContent(),
           ),
         ],
       ),
