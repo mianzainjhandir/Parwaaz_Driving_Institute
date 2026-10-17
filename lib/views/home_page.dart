@@ -5,6 +5,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../widgets/parwaz_app_bar.dart';
 import 'about.dart';
 import 'courses.dart';
+import 'gallery.dart';
 import 'home_content.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -19,6 +20,7 @@ class _MyHomePageState extends State<MyHomePage> {
   final ScrollController _scrollController = ScrollController();
   final GlobalKey _aboutKey = GlobalKey();
   final GlobalKey _coursesKey = GlobalKey();
+  final GlobalKey _galleryKey = GlobalKey();
 
   @override
   void dispose() {
@@ -49,6 +51,14 @@ class _MyHomePageState extends State<MyHomePage> {
       if (_coursesKey.currentContext != null) {
         Scrollable.ensureVisible(
           _coursesKey.currentContext!,
+          duration: const Duration(milliseconds: 600),
+          curve: Curves.easeInOut,
+        );
+      }
+    } else if (title == 'Gallery') {
+      if (_galleryKey.currentContext != null) {
+        Scrollable.ensureVisible(
+          _galleryKey.currentContext!,
           duration: const Duration(milliseconds: 600),
           curve: Curves.easeInOut,
         );
@@ -89,11 +99,15 @@ class _MyHomePageState extends State<MyHomePage> {
     if (_selectedTab == 'Courses') {
       return CoursesView(key: _coursesKey);
     }
+    if (_selectedTab == 'Gallery') {
+      return GalleryView(key: _galleryKey);
+    }
     return Column(
       children: [
         const HomeContent(),
         AboutView(key: _aboutKey),
         CoursesView(key: _coursesKey),
+        GalleryView(key: _galleryKey),
       ],
     );
   }
