@@ -5,12 +5,14 @@ class ParwaazAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Function(String)? onMenuItemSelected;
   final VoidCallback? onBookNowPressed;
   final VoidCallback? onWhatsAppPressed;
+  final String selectedTab;
 
   const ParwaazAppBar({
     super.key,
     this.onMenuItemSelected,
     this.onBookNowPressed,
     this.onWhatsAppPressed,
+    this.selectedTab = 'Home',
   });
 
   @override
@@ -83,17 +85,19 @@ class ParwaazAppBar extends StatelessWidget implements PreferredSizeWidget {
               if (isWide)
                 Row(
                   children: [
-                    _navItem('Home', accentPink, true),
-                    const SizedBox(width: 24),
-                    _navItem('About', primaryColor, false),
-                    const SizedBox(width: 24),
-                    _navItem('Courses', primaryColor, false),
-                    const SizedBox(width: 24),
-                    _navItem('Gallery', primaryColor, false),
-                    const SizedBox(width: 24),
-                    _navItem('Reviews', primaryColor, false),
-                    const SizedBox(width: 24),
-                    _navItem('Contact', primaryColor, false),
+                    ...['Home', 'About', 'Courses', 'Gallery', 'Reviews', 'Contact'].map(
+                      (item) {
+                        bool isSelected = selectedTab == item;
+                        return Padding(
+                          padding: const EdgeInsets.only(right: 24.0),
+                          child: _navItem(
+                            item,
+                            isSelected ? accentPink : primaryColor,
+                            isSelected,
+                          ),
+                        );
+                      },
+                    ),
                   ],
                 ),
 

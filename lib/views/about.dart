@@ -9,6 +9,7 @@ class AboutView extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         bool isWide = constraints.maxWidth > 900;
+        bool isCardWide = constraints.maxWidth > 750;
 
         return Container(
           color: Colors.white,
@@ -16,31 +17,38 @@ class AboutView extends StatelessWidget {
             horizontal: isWide ? 80 : 24,
             vertical: 60,
           ),
-          child: isWide
-              ? Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    // Left Text Section
-                    Expanded(
-                      flex: 1,
-                      child: _buildTextContent(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              isWide
+                  ? Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        // Left Text Section
+                        Expanded(
+                          flex: 1,
+                          child: _buildTextContent(),
+                        ),
+                        const SizedBox(width: 60),
+                        // Right Image Section
+                        Expanded(
+                          flex: 1,
+                          child: _buildImageSection(),
+                        ),
+                      ],
+                    )
+                  : Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _buildTextContent(),
+                        const SizedBox(height: 40),
+                        _buildImageSection(),
+                      ],
                     ),
-                    const SizedBox(width: 60),
-                    // Right Image Section
-                    Expanded(
-                      flex: 1,
-                      child: _buildImageSection(),
-                    ),
-                  ],
-                )
-              : Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _buildTextContent(),
-                    const SizedBox(height: 40),
-                    _buildImageSection(),
-                  ],
-                ),
+              const SizedBox(height: 60),
+              _buildMissionVisionValuesCard(isCardWide),
+            ],
+          ),
         );
       },
     );
@@ -150,6 +158,228 @@ class AboutView extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+
+  Widget _buildMissionVisionValuesCard(bool isWide) {
+    final pinkBg = const Color(0xFFFFF0F5);
+    final borderPink = const Color(0xFFFFD1DC);
+    final iconCircleBg = const Color(0xFFFFE3EC);
+    final iconColor = const Color(0xFFFF2E63);
+    final titleColor = const Color(0xFF0B2545);
+    final textColor = const Color(0xFF4A5568);
+
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 36),
+      decoration: BoxDecoration(
+        color: pinkBg,
+        borderRadius: BorderRadius.circular(24),
+        border: Border.all(color: borderPink, width: 1.2),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.03),
+            blurRadius: 12,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: isWide
+          ? Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: _buildCardItem(
+                    icon: Icons.verified_user_rounded,
+                    title: 'Our Mission',
+                    content: Text(
+                      'To empower women\nwith driving skills and\nconfidence.',
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.montserrat(
+                        fontSize: 14,
+                        color: textColor,
+                        height: 1.5,
+                      ),
+                    ),
+                    iconCircleBg: iconCircleBg,
+                    iconColor: iconColor,
+                    titleColor: titleColor,
+                  ),
+                ),
+                _buildVerticalDivider(borderPink),
+                Expanded(
+                  child: _buildCardItem(
+                    icon: Icons.settings_outlined,
+                    title: 'Our Vision',
+                    content: Text(
+                      'To create a safer, more\nindependent community\nof female drivers.',
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.montserrat(
+                        fontSize: 14,
+                        color: textColor,
+                        height: 1.5,
+                      ),
+                    ),
+                    iconCircleBg: iconCircleBg,
+                    iconColor: iconColor,
+                    titleColor: titleColor,
+                  ),
+                ),
+                _buildVerticalDivider(borderPink),
+                Expanded(
+                  child: _buildCardItem(
+                    icon: Icons.verified_user_rounded,
+                    title: 'Our Values',
+                    content: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          'Safety   |   Respect',
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.montserrat(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                            color: textColor,
+                            height: 1.5,
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          'Support   |   Progress',
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.montserrat(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                            color: textColor,
+                            height: 1.5,
+                          ),
+                        ),
+                      ],
+                    ),
+                    iconCircleBg: iconCircleBg,
+                    iconColor: iconColor,
+                    titleColor: titleColor,
+                  ),
+                ),
+              ],
+            )
+          : Column(
+              children: [
+                _buildCardItem(
+                  icon: Icons.verified_user_rounded,
+                  title: 'Our Mission',
+                  content: Text(
+                    'To empower women with driving skills and confidence.',
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.montserrat(
+                      fontSize: 14,
+                      color: textColor,
+                      height: 1.5,
+                    ),
+                  ),
+                  iconCircleBg: iconCircleBg,
+                  iconColor: iconColor,
+                  titleColor: titleColor,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 24),
+                  child: Divider(color: borderPink, height: 1),
+                ),
+                _buildCardItem(
+                  icon: Icons.settings_outlined,
+                  title: 'Our Vision',
+                  content: Text(
+                    'To create a safer, more independent community of female drivers.',
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.montserrat(
+                      fontSize: 14,
+                      color: textColor,
+                      height: 1.5,
+                    ),
+                  ),
+                  iconCircleBg: iconCircleBg,
+                  iconColor: iconColor,
+                  titleColor: titleColor,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 24),
+                  child: Divider(color: borderPink, height: 1),
+                ),
+                _buildCardItem(
+                  icon: Icons.verified_user_rounded,
+                  title: 'Our Values',
+                  content: Text(
+                    'Safety   |   Respect\nSupport   |   Progress',
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.montserrat(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      color: textColor,
+                      height: 1.5,
+                    ),
+                  ),
+                  iconCircleBg: iconCircleBg,
+                  iconColor: iconColor,
+                  titleColor: titleColor,
+                ),
+              ],
+            ),
+    );
+  }
+
+  Widget _buildCardItem({
+    required IconData icon,
+    required String title,
+    required Widget content,
+    required Color iconCircleBg,
+    required Color iconColor,
+    required Color titleColor,
+  }) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Container(
+          width: 58,
+          height: 58,
+          decoration: BoxDecoration(
+            color: iconCircleBg,
+            shape: BoxShape.circle,
+            boxShadow: [
+              BoxShadow(
+                color: iconColor.withValues(alpha: 0.15),
+                blurRadius: 10,
+                offset: const Offset(0, 3),
+              ),
+            ],
+          ),
+          child: Icon(
+            icon,
+            color: iconColor,
+            size: 28,
+          ),
+        ),
+        const SizedBox(height: 16),
+        Text(
+          title,
+          style: GoogleFonts.montserrat(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: titleColor,
+          ),
+        ),
+        const SizedBox(height: 12),
+        content,
+      ],
+    );
+  }
+
+  Widget _buildVerticalDivider(Color borderColor) {
+    return Container(
+      width: 1,
+      height: 110,
+      color: borderColor,
+      margin: const EdgeInsets.symmetric(horizontal: 16),
     );
   }
 }

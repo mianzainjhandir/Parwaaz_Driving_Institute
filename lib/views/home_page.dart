@@ -15,6 +15,36 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   String _selectedTab = 'Home';
+  final ScrollController _scrollController = ScrollController();
+  final GlobalKey _aboutKey = GlobalKey();
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _onMenuItemSelected(String title) {
+    setState(() {
+      _selectedTab = title;
+    });
+
+    if (title == 'Home') {
+      _scrollController.animateTo(
+        0,
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeInOut,
+      );
+    } else if (title == 'About') {
+      if (_aboutKey.currentContext != null) {
+        Scrollable.ensureVisible(
+          _aboutKey.currentContext!,
+          duration: const Duration(milliseconds: 600),
+          curve: Curves.easeInOut,
+        );
+      }
+    }
+  }
 
   Future<void> _launchWhatsApp() async {
     // Phone number: 03234248524 -> international format: +923234248524
@@ -39,6 +69,18 @@ class _MyHomePageState extends State<MyHomePage> {
   void _onBookNow() {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('Book Now clicked!')),
+    );
+  }
+
+  Widget _buildBodyContent() {
+    if (_selectedTab == 'About') {
+      return AboutView(key: _aboutKey);
+    }
+    return Column(
+      children: [
+        const HomeContent(),
+        AboutView(key: _aboutKey),
+      ],
     );
   }
 
@@ -92,10 +134,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
                 onTap: () {
-                  setState(() {
-                    _selectedTab = item;
-                  });
                   Navigator.pop(context);
+                  _onMenuItemSelected(item);
                 },
               ),
             ),
@@ -159,6 +199,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       body: CustomScrollView(
+        controller: _scrollController,
         slivers: [
           SliverAppBar(
             floating: true,
@@ -170,18 +211,15 @@ class _MyHomePageState extends State<MyHomePage> {
             elevation: 0,
             flexibleSpace: FlexibleSpaceBar(
               background: ParwaazAppBar(
-                onMenuItemSelected: (title) {
-                  setState(() {
-                    _selectedTab = title;
-                  });
-                },
+                selectedTab: _selectedTab,
+                onMenuItemSelected: _onMenuItemSelected,
                 onBookNowPressed: _onBookNow,
                 onWhatsAppPressed: _launchWhatsApp,
               ),
             ),
           ),
           SliverToBoxAdapter(
-            child: _selectedTab == 'About' ? const AboutView() : const HomeContent(),
+            child: _buildBodyContent(),
           ),
         ],
       ),
